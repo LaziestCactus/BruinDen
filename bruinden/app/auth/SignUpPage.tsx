@@ -16,12 +16,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
   const [gender, setGender] = useState('');
   const [idError, setIdError] = useState('');
 
-  const handleGoogleSignUp = useCallback(() => {
-    // Implement Google sign-up here
-  }, []);
-
   const handleSignUp = useCallback(() => {
-    // Implement sign-up here
   }, [firstName, lastName, universityId, profileImage, collegeYear, gender]);
 
   const handleImageUpload = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,15 +38,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
       <div className="bg-white p-8 rounded-lg shadow-lg w-[90vw] md:w-[600px]" style={{ color: '#2F4858' }}>
-        <h2 className="text-2xl font-bold mb-4">Sign Up with Google:</h2>
-        <button
-          onClick={handleGoogleSignUp}
-          className="w-full mb-2 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#86bbd8] hover:bg-[#86bbd8] flex items-center justify-center"
-        >
-          <FcGoogle size={24} />
-             Sign Up
-        </button>
-        <h3 className="text-2xl font-bold mt-8 mb-4 text-left">Sign Up with an Email:</h3>
+        <h3 className="text-2xl font-bold mb-4 text-left">Sign Up with an Email:</h3>
         <div className="flex gap-2 mb-2">
           <input
             type="text"
