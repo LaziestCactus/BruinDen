@@ -42,7 +42,7 @@ const SORT_OPTIONS = [
   { value: 'beds-desc', label: 'Bedrooms: Most to Least' }
 ];
 
-const HousingListings = () => {
+const MyListings = () => {
   const [listings, setListings] = useState<Listing[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -194,4 +194,4 @@ const HousingListings = () => {
   );
 };
 
-export default HousingListings;
+export default MyListings;
