@@ -18,6 +18,8 @@ https://docs.google.com/document/d/1Gxc4xvDvL-ncSKKCWR_ej-Vv0OBaiP21iwYS9AsvrZs/
 - Post Forum for Users to Connect
 - User Login Authentication
 - Favoriting Posts
+WE NEED TO FILL IN WHAT OUR PROJECT CAN DO 
+
 
 ## Installation
 
