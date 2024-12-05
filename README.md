@@ -4,7 +4,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 Clone the git repo using:
 
-'''git clone https://github.com/LaziestCactus/BruinDen.git'''
+'''bash
+git clone https://github.com/LaziestCactus/BruinDen.git
+'''
+
+Install the necesary dependencies for the project:
 
 
 ## Database Set Up
