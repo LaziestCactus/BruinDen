@@ -65,9 +65,11 @@ Use the .env in our Code Repo Document submitted on gradescope to view the apart
 - CLOUDINARY_API_SECRET
 
 ### Running the Project
-
+Navigate to the project directory:
+```
+cd bruinden
+```
 Run the development server:
-
 ```bash
 npm run dev
 ```
@@ -76,4 +78,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 # Testing Overview
 
-NEED TO ADD STUFF*********************************
+Attached in GradeScope Submission via Google Doc.
