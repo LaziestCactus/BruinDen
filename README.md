@@ -8,10 +8,15 @@ Platform: Web-based application
 
 ### Tech Stack
 Frontend: React, Tailwind
+
 Backend: Node.js  
+
 Map Integration: Google Maps API for real-time mapping of apartment locations  
+
 Image Processing: Cloudinary
+
 User Authentication: Email checking system to ensure log in access to the platform given only to verified students who sign up
+
 
 ## Project Proposal
 https://docs.google.com/document/d/1Gxc4xvDvL-ncSKKCWR_ej-Vv0OBaiP21iwYS9AsvrZs/edit?usp=sharing 
