@@ -118,7 +118,7 @@ const HousingListings = () => {
   }
 
   return (
-    <main className="pt-24">
+    <main className="pt-16">
       <div className="flex flex-col lg:flex-row h-[calc(100vh-5rem)]">
         {/* Map Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full lg:sticky lg:top-20">
@@ -136,7 +136,7 @@ const HousingListings = () => {
 
         {/* Listings Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full overflow-y-auto px-4 lg:px-8 pb-8">
-          <div className="sticky top-0 py-8 z-10">
+          <div className="sticky top-0 py-8 z-[5]">
           <div className="bg-[#A7C7E7] px-4 py-2 rounded-lg">
             <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-[#2F4858]">PLACES FOR YOU</h2>
@@ -170,14 +170,15 @@ const HousingListings = () => {
                 }`}
               >
                 <div className="flex flex-col sm:flex-row">
-                  <div className="relative w-full sm:w-1/3 h-48 sm:h-auto">
+                  {/* Image Container */}
+                  <div className="relative w-full sm:w-40 h-32 sm:h-auto overflow-hidden rounded-l-lg">
                     <img
                       src={listing.imageUrl}
                       alt={listing.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="w-full sm:w-2/3 p-4">
+                  <div className="w-full sm:flex-1 p-4">
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="font-semibold text-lg">{listing.address}</h3>

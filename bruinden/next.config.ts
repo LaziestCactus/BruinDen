@@ -3,7 +3,17 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Image domains
   images: {
-    domains: ['maps.googleapis.com', 'maps.gstatic.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      }
+    ],
+   //domains: ['maps.googleapis.com', 'maps.gstatic.com', ''],
   },
 
   // API routes configuration
