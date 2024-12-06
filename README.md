@@ -1,6 +1,6 @@
 # BruinDen
 
-Jump To: [Overview](##Project_Members_&_Git_ID) | [Installation & Running](#Installation) | [Testing](#Testing_Overview)
+Jump To: [Overview](##Project_Members_&_Git_ID) | [Installation & Running](#Installation) | [Testing](#Testing-Overview)
 
 ### Project Members & Git ID
 - [Kelsey Shan](https://github.com/kshan813)
