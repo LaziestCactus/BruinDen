@@ -62,16 +62,6 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
     }
   }, []);
 
-  const handleUniversityIdChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    if (/^\d*$/.test(value)) {
-      setUniversityId(value);
-      setIdError('');
-    } else {
-      setIdError('University ID must be a number');
-    }
-  }, []);
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
       <div className="bg-white p-8 rounded-lg shadow-lg w-[90vw] md:w-[600px]" style={{ color: '#2F4858' }}>
@@ -107,14 +97,6 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-2 py-2 px-4 border border-gray-300 rounded-md text-sm"
-          style={{ color: '#2F4858', fontSize: '0.875rem' }}
-        />
-        <input
-          type="text"
-          placeholder="University ID#"
-          value={universityId}
-          onChange={handleUniversityIdChange}
           className="w-full mb-2 py-2 px-4 border border-gray-300 rounded-md text-sm"
           style={{ color: '#2F4858', fontSize: '0.875rem' }}
         />
