@@ -178,7 +178,7 @@ const CreateListing = () => {
                   <div className="flex text-sm text-gray-600">
                     <label
                       htmlFor="images"
-                      className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+                      className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-ring-blue-500"
                     >
                       <span>Upload files</span>
                       <input
