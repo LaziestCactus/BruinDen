@@ -20,7 +20,10 @@ model User {
   collegeYear String?
   gender String?
   accounts Account[]
-  listings Listing[]
+  listings Listing[] @relation("UserListings")
+  favorites Favorite[]
+  posts Post[]
+  comments Comment[]
 }
 
 model Account {
@@ -54,7 +57,39 @@ model Listing {
   userID String @db.ObjectId
   price Int
 
-  user User @relation(fields: [userID], references: [id], onDelete: Cascade)
+  user User @relation("UserListings", fields: [userID], references: [id], onDelete: Cascade)
+  favoritedBy    Favorite[]
 }
+
+model Favorite {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  listingId  String   @db.ObjectId
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content String
+  userId  String @db.ObjectId
+  createdAt DateTime  @default(now())
+  comments  Comment[]
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+  userId String @db.ObjectId
+  postId String @db.ObjectId
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
 
 //downgrade react

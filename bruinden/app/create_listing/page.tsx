@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 
+// Previous SVG icon components remain the same...
 const LocationIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -46,11 +47,14 @@ const CreateListing = () => {
   };
 
   return (
-    <div className="max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4 pt-24">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Apartment Listing</h1>
+    <div className="w-full p-6 bg-gray-100">
+    <div className="w-full mt-8 mx-auto">
+    <h1 style={{ fontSize: "50px", marginTop: "100px", marginBottom: "20px", display: "flex", alignItems: "center", fontWeight: "bold", justifyContent: "center", textAlign: "center", color: "#2F4858"}}>Create an Apartment Listing</h1>
+    <hr style={{ border: "3px solid #2F4858", marginBottom: "20px" }} />
+        <div className="space-y-4 bg-white p-6 rounded-lg shadow-md">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
+            {/* Previous inputs remain same until amenities... */}
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Address
@@ -82,7 +86,7 @@ const CreateListing = () => {
                     type="number"
                     placeholder="Number of bedrooms"
                     value={bedrooms}
-                    onChange={(e) => setBedrooms(e.target.value)}
+                    onChange={(e) => setBedrooms(Math.max(0, Number(e.target.value)).toString())}
                     className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -99,7 +103,7 @@ const CreateListing = () => {
                     type="number"
                     placeholder="Number of bathrooms"
                     value={bathrooms}
-                    onChange={(e) => setBathrooms(e.target.value)}
+                    onChange={(e) => setBathrooms(Math.max(0, Number(e.target.value)).toString())}
                     className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -118,12 +122,13 @@ const CreateListing = () => {
                   type="number"
                   placeholder="Square footage"
                   value={sqft}
-                  onChange={(e) => setSqft(e.target.value)}
+                  onChange={(e) => setSqft(Math.max(0, Number(e.target.value)).toString())}
                   className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
             </div>
 
+            {/* New Amenities Input */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Amenities
@@ -201,12 +206,13 @@ const CreateListing = () => {
             </button>
             <button
               type="submit"
-              className="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+              className="px-6 py-3 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors bg-[#86bbd8] hover:bg-[#86bbd8]"
             >
               Create Listing
             </button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

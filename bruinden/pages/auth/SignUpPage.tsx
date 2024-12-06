@@ -1,10 +1,8 @@
 'use client';
 import { useState, useCallback } from 'react';
-import { FcGoogle } from 'react-icons/fc'; // Google icon
 import axios from 'axios';
 import { Snackbar } from '@mui/material';
 
-// Define the prop types for the component
 interface SignUpPageProps {
   onBack: () => void;
 }
@@ -26,7 +24,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
   const handleGoogleSignUp = useCallback(() => {
     // Implement Google sign-up here
   }, []);
-
+  axios.defaults.baseURL = "http://localhost:3000";
   const handleSignUp = useCallback(async () => {
     // Implement sign-up here
     if (!firstName || ! lastName || !email || !password || !gender || !collegeYear || !universityId){
@@ -43,7 +41,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
     }
     const fullName = firstName + " " + lastName;
     const data = {'name': fullName, 'email': email, 'password': password, 'gender': gender, 'collegeYear': collegeYear}
-    axios.post('../pages/signup', data)
+    axios.post('/api/signup', data)
       .then(function (response) {
         setIsLoading(true);
         console.log(response);
@@ -77,15 +75,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
       <div className="bg-white p-8 rounded-lg shadow-lg w-[90vw] md:w-[600px]" style={{ color: '#2F4858' }}>
-        <h2 className="text-2xl font-bold mb-4">Sign Up with Google:</h2>
-        <button
-          onClick={handleGoogleSignUp}
-          className="w-full mb-2 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#86bbd8] hover:bg-[#86bbd8] flex items-center justify-center"
-        >
-          <FcGoogle size={24} />
-             Sign Up
-        </button>
-        <h3 className="text-2xl font-bold mt-8 mb-4 text-left">Sign Up with an Email:</h3>
+        <h1 className="text-2xl font-bold mb-4 text-left">Sign Up with an Email:</h1>
         <div className="flex gap-2 mb-2">
           <input
             type="text"

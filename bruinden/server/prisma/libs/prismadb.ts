@@ -7,4 +7,6 @@ declare global {
 const client = globalThis.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== "production") globalThis.prisma = client;
 
+//export { client as prisma }; // Named export
+
 export default client;

@@ -13,11 +13,16 @@ model User {
   email String? @unique
   emailVerified DateTime?
   image String?
+  uid String?
   hashedPassword String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  collegeYear String?
+  gender String?
   accounts Account[]
   listings Listing[]
+  posts Post[]
+  comments Comment[]
 }
 
 model Account {
@@ -53,5 +58,26 @@ model Listing {
 
   user User @relation(fields: [userID], references: [id], onDelete: Cascade)
 }
+
+model Post {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content String
+  userId  String @db.ObjectId
+  createdAt DateTime  @default(now())
+  comments  Comment[]
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+  userId String @db.ObjectId
+  postId String @db.ObjectId
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
 
 //downgrade react

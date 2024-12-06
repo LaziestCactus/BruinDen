@@ -1,6 +1,7 @@
 import './globals.css';
 import { Montserrat } from 'next/font/google';
 import Navigationbar from './components/navigation_bar/Navigationbar';
+import React from 'react';
 
 export const metadata = {
   title: 'BruinDen',
