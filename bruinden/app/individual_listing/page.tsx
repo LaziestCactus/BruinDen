@@ -68,12 +68,19 @@ const ListingPage: React.FC = () => {
       if (!id) return; // ID is not available yet
 
       try {
-        const response = await fetch(`/api/individual_listing?id=${id}`)
+        const response = await fetch(`/api/individual_listing?listingId=${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log('Response received:', response); // Add this log
+  
         if (!response.ok) {
-          throw new Error("Failed to fetch listing");
+          throw new Error('Failed to fetch listings');
         }
-        
         const data = await response.json();
+        console.log('Data received:', data); // Add this log
         setListing(data);
         setIsLoading(false);
       } catch (error) {
