@@ -54,7 +54,15 @@ npm install
 You can view the package.json file to see what dependencies were installed.
 
 ### Database Set Up
-Use the .env in our Code Repo Document to view the apartment listings and posts we've added
+Use the .env in our Code Repo Document to view the apartment listings and posts we've added. You should have something for these:
+- NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+- DATABASE_URL
+- NEXTAUTH_SECRET
+- JWT_SECRET
+- CLOUDINARY_CLOUD_NAME
+- CLOUDINARY_API_KEY
+- CLOUDINARY_UPLOAD_PRESET
+- CLOUDINARY_API_SECRET
 
 ### Running the Project
 
