@@ -17,12 +17,13 @@ User Authentication: Email checking system to ensure log in access to the platfo
 https://docs.google.com/document/d/1Gxc4xvDvL-ncSKKCWR_ej-Vv0OBaiP21iwYS9AsvrZs/edit?usp=sharing 
 
 ## Feature Description
-- Post Forum for Users to Connect
-- User Login Authentication
-- Favoriting Posts
-
-WE NEED TO FILL IN WHAT OUR PROJECT CAN DO 
-
+- User Authentication
+- Creating an Apartment Listing
+- Post on Message Board
+- Search Functionality with a Filter and Search Bar
+- Add Listings to a Favorites List
+- Open up Detailed Listing Pages
+- Updating User Profile
 
 ## Installation
 
