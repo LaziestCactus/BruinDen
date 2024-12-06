@@ -19,10 +19,12 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
 *.pem
+*.node
 
 # debug
 npm-debug.log*
@@ -31,6 +33,7 @@ yarn-error.log*
 
 # env files (can opt-in for commiting if needed)
 .env*
+.env.local
 
 # vercel
 .vercel
@@ -38,3 +41,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+public/node_modules/next/swc-darwin-arm64/next-swc.darwin-arm64.node
+node_modules/
+.next/
+build/
+.env.local
+*.node
+public/node_modules/next/swc-darwin-arm64/next-swc.darwin-arm64.node
+dist/
+
+#specifics
+public/node_modules/
+client/node_modules/
