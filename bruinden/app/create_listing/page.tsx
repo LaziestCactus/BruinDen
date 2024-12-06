@@ -59,7 +59,6 @@ const CreateListing = () => {
       formData.append('amenities', amenities);
       formData.append('description', description);
       
-      // Append each image to formData
       images.forEach((image) => {
         formData.append('images', image);
       });
@@ -68,7 +67,7 @@ const CreateListing = () => {
 
       const response = await fetch('/api/listings/create', {
         method: 'POST',
-        body: formData // Send as FormData, not JSON
+        body: formData 
       });
 
       console.log('Response status:', response.status);
@@ -82,10 +81,8 @@ const CreateListing = () => {
       const data = await response.json();
       console.log('Success response:', data);
 
-      // Show success message
       alert('Listing created successfully!');
       
-      // Clear the form
       setAddress('');
       setPrice('');
       setBedrooms('');
@@ -294,7 +291,6 @@ const CreateListing = () => {
         </form>
         </div>
       </div>
-    //</div>
   );
 };
 

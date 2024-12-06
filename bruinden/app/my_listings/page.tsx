@@ -23,7 +23,7 @@ interface Listing {
 }
 
 const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
-  const R = 3959; // Earth's radius in miles
+  const R = 3959; 
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
   const a = 
@@ -59,7 +59,6 @@ const HousingListings = () => {
         }
         const data = await response.json();
         
-        // Add distance calculation
         const listingsWithDistance = data.map((listing: Listing) => ({
           ...listing,
           distanceToUCLA: calculateDistance(
@@ -111,7 +110,6 @@ const HousingListings = () => {
   return (
     <main className="pt-24">
       <div className="flex flex-col lg:flex-row h-[calc(100vh-5rem)]">
-        {/* Map Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full lg:sticky lg:top-20">
           <MapComponent 
             listings={sortedListings}
@@ -125,7 +123,6 @@ const HousingListings = () => {
           />
         </div>
 
-        {/* Listings Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full overflow-y-auto px-4 lg:px-8 pb-8">
           <div className="sticky top-0 bg-white py-6 z-10">
             <div className="flex justify-between items-center">

@@ -122,7 +122,7 @@ const MeetPeople: React.FC = () => {
           setPosts((prevPosts) =>
             prevPosts.map((post) =>
               post.id === postId
-                ? // Use empty array if comments is undefined
+                ? 
                   { ...post, comments: [...(post.comments || []), newComment] }
                 : post
             )

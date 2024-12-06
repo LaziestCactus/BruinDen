@@ -33,7 +33,7 @@ interface User {
 }
 
 const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
-  const R = 3959; // Earth's radius in miles
+  const R = 3959; 
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
   const a = 
@@ -63,8 +63,8 @@ const HousingListings = () => {
 
   const fetchFavorites = async () => {
     try {
-      // setIsLoading(true);
-      console.log('Fetching listings...'); // Add this log
+    
+      console.log('Fetching listings...'); 
       const userID = fetchUserFromToken()?.id;
       console.log(userID);
       if (!userID) {
@@ -78,14 +78,13 @@ const HousingListings = () => {
           'Content-Type': 'application/json',
         },
       });
-      console.log('Response received:', response); // Add this log
+      console.log('Response received:', response);
 
       if (!response.ok) {
         throw new Error('Failed to fetch listings');
       }
       const data: Listing[] = await response.json();
-      console.log('Data received:', data); // Add this log
-      
+      console.log('Data received:', data);
       const listingIds = data.map((listing) => listing._id);
       console.log("Favorited Listing IDs: ", listingIds);
       
@@ -93,7 +92,6 @@ const HousingListings = () => {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch listings');
     } finally {
-      // setIsLoading(false);
     }
   };
 
@@ -101,22 +99,21 @@ const HousingListings = () => {
     const fetchListings = async () => {
       try {
         setIsLoading(true);
-        console.log('Fetching listings...'); // Add this log
+        console.log('Fetching listings...');
         const response = await fetch('/api/listings', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
         });
-        console.log('Response received:', response); // Add this log
+        console.log('Response received:', response); 
 
         if (!response.ok) {
           throw new Error('Failed to fetch listings');
         }
         const data = await response.json();
-        console.log('Data received:', data); // Add this log
+        console.log('Data received:', data); 
         
-        // Add distance calculation
         const listingsWithDistance = data.map((listing: Listing) => ({
           ...listing,
           distanceToUCLA: calculateDistance(
@@ -157,7 +154,6 @@ const HousingListings = () => {
   
 
   const handleLike = async (listingId: string) => {
-    // setIsLoading(true); // Set loading to true when the button is pressed
     console.log(listingId);
     const userId = fetchUserFromToken()?.id;
         console.log(userId);
@@ -176,13 +172,12 @@ const HousingListings = () => {
           listingId
         }),
       });
-      const result = await response.json(); // Assuming the response is in JSON format
+      const result = await response.json(); 
       console.log(result);
     } catch (error) {
       console.error('Error fetching data:', error);
       alert('Error fetching data');
     } finally {
-      // setIsLoading(false); // Set loading to false when the request completes
     }
     fetchFavorites();
   };
@@ -217,7 +212,6 @@ const HousingListings = () => {
   return (
     <main className="pt-24" style = {{zIndex: "1"}}>
       <div className="flex flex-col lg:flex-row h-[calc(100vh-5rem)]">
-        {/* Map Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full lg:sticky lg:top-20">
           <MapComponent 
             listings={sortedListings}
@@ -230,8 +224,6 @@ const HousingListings = () => {
             }}
           />
         </div>
-
-        {/* Listings Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full overflow-y-auto px-4 lg:px-8 pb-8">
           <div className="sticky top-0 py-8 z-[5]">
           <div className="bg-[#F6AE2D] px-4 py-2 rounded-lg">

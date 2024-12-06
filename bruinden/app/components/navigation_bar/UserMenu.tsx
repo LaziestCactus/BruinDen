@@ -9,10 +9,6 @@ import { useRouter } from "next/navigation";
 
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
-//import getCurrentUser from "@/app/action/getCurrUser";
-// interface curUser {
-//   currentUser?: User | null;
-// }
 
 interface User {
   id: string;
@@ -96,7 +92,7 @@ const UserMenu = () => {
           <div className="flex flex-col cursor-pointer py-2">
             {currentUser ? ( //TODO: Check if user exist instead. Need to debug (code commented above)
               <>
-                {/*fetch Render if currentUser is not null */}
+                {/*fetch Render if currentUser is not null, drop down menu shows different stuff depending if logged in or not*/}
                 <MenuItem
                   onClick={() => {}}
                   label="Profile"

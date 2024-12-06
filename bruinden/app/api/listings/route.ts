@@ -1,4 +1,3 @@
-// app/api/listings/route.ts
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb'
 import { ObjectId } from 'mongodb';
@@ -25,24 +24,22 @@ export async function GET() {
 
     const db = client.db("test");
     
-    // Log all collections
     const collections = await db.listCollections().toArray();
     console.log('Available collections:', collections.map(c => c.name));
 
-    // Let's check both collections
     const upperCollection = db.collection('Listing');
 
     const upperCount = await upperCollection.countDocuments();
     
     console.log('Documents in Listing collection:', upperCount);
 
-    // Use the correct collection (probably 'Listing' since that's what you see in MongoDB)
     const collection = db.collection('Listing');
     
     let listings = await collection.find({}).toArray();
     console.log('Listings from Listing collection:', listings);
 
-    // If no listings exist, insert sample data
+    //If no listings exist, insert sample data just so the page isn't completely empty
+    //for the the TA we gave the .env local file, so they should be able to look at the website with listings we added ourselfs
     if (listings.length === 0) {
       const sampleListings = [
         {

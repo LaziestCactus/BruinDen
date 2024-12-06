@@ -32,7 +32,7 @@ interface Listing {
 }
 
 const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
-  const R = 3959; // Earth's radius in miles
+  const R = 3959;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
   const a = 
@@ -82,8 +82,7 @@ const FavoriteListings = () => {
 
   const fetchListings = async () => {
     try {
-      // setIsLoading(true);
-      console.log('Fetching listings...'); // Add this log
+      console.log('Fetching listings...');
       const userID = fetchUserFromToken()?.id;
       console.log(userID);
       if (!userID) {
@@ -96,15 +95,14 @@ const FavoriteListings = () => {
           'Content-Type': 'application/json',
         },
       });
-      console.log('Response received:', response); // Add this log
+      console.log('Response received:', response); 
 
       if (!response.ok) {
         throw new Error('Failed to fetch listings');
       }
       const data = await response.json();
-      console.log('Data received:', data); // Add this log
+      console.log('Data received:', data); 
       
-      // Add distance calculation
       const listingsWithDistance = data.map((listing: Listing) => ({
         ...listing,
         distanceToUCLA: calculateDistance(
@@ -119,7 +117,6 @@ const FavoriteListings = () => {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch listings');
     } finally {
-      // setIsLoading(false);
     }
   };
 
@@ -143,7 +140,7 @@ const FavoriteListings = () => {
           listingId
         }),
       });
-      const result = await response.json(); // Assuming the response is in JSON format
+      const result = await response.json();
     } catch (error) {
       console.error('Error fetching data:', error);
       alert('Error fetching data');
@@ -182,7 +179,6 @@ const FavoriteListings = () => {
   return (
     <main className="pt-24">
       <div className="flex flex-col lg:flex-row h-[calc(100vh-5rem)]">
-        {/* Map Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full lg:sticky lg:top-20">
           <MapComponent 
             listings={sortedListings}
@@ -195,8 +191,6 @@ const FavoriteListings = () => {
             }}
           />
         </div>
-
-        {/* Listings Section */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-full overflow-y-auto px-4 lg:px-8 pb-8">
           <div className="sticky top-0 py-8 z-10">
           <div className="bg-[#A7C7E7] px-4 py-2 rounded-lg">

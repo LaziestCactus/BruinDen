@@ -12,7 +12,7 @@ export default function Home() {
   const [opacity, setOpacity] = useState<number>(1);
 
   return (
-    <div
+    <div //add a gradient to the page so it matches other pages
       style={{
         display: "flex",
         flexDirection: "column",

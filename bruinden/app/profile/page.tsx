@@ -3,7 +3,6 @@ import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
-//import UserId from "@/pages/api/user/[userId]";
 
 interface User {
   id: string;
@@ -16,11 +15,11 @@ interface User {
 }
 
 const ProfilePage = () => {
-  // This should be the stuff the user initially set when signing up and display them instead of the temps I set it to
+  // This should be the stuff the user initially set when signing up and display them instead of the temps I set it to - Kelsey
 
-  const [currentUser, setCurrentUser] = useState<User | null>(null); // Assume this gets populated from a token or API
-  const [firstName, setFirstName] = useState<string>(""); // Start with empty string
-  const [lastName, setLastName] = useState<string>(""); // Start with empty string
+  const [currentUser, setCurrentUser] = useState<User | null>(null); 
+  const [firstName, setFirstName] = useState<string>(""); 
+  const [lastName, setLastName] = useState<string>(""); 
   const [universityId, setUniversityId] = useState(currentUser?.uid);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [collegeYear, setCollegeYear] = useState(currentUser?.collegeYear);
@@ -54,7 +53,7 @@ const ProfilePage = () => {
         throw new Error("Fail to fetch user from email");
       }
       const data = await response.json();
-      setCurrentUser(data.user); // Adjust based on your API response structure
+      setCurrentUser(data.user);
     } catch (error) {
       console.error("Can't fetch user:", error);
     }

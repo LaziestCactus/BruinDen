@@ -1,37 +1,3 @@
-// import { NextApiRequest, NextApiResponse } from 'next';
-// import  clientPromise from '@/lib/mongodb';
-// import { ObjectId } from 'mongodb';
-
-// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//     if (req.method !== 'GET') {
-//         return res.status(405).json({ message: 'Method not allowed' });
-//     }
-
-//     const { id } = req.query;
-//     if (!id || typeof id !== 'string') {
-//         return res.status(400).json({ message: 'Invalid ID' });
-//     }
-
-//     try {
-//         const client = await clientPromise;
-//         const db = client.db("test"); // change when deployed
-//         const listing = await db.collection("listings").findOne({
-//             __id: new ObjectId(id),
-//         });
-
-//         if (!listing) {
-//             return res.status(404).json({ message: "Listing not found" });
-//         }
-
-//         res.status(200).json(listing);
-//     } catch (e) {
-//         console.error(e);
-//         res.status(500).json({ error: "Failed to fetch listing" });
-//     }
-// }
-
-
-// app/api/listings/route.ts
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb'
 import { ObjectId } from 'mongodb';
@@ -66,18 +32,15 @@ export async function GET(request: Request) {
 
     const db = client.db("test");
     
-    // Log all collections
     const collections = await db.listCollections().toArray();
     console.log('Available collections:', collections.map(c => c.name));
 
-    // Let's check both collections
     const upperCollection = db.collection('Listing');
 
     const upperCount = await upperCollection.countDocuments();
     
     console.log('Documents in Listing collection:', upperCount);
 
-    // Use the correct collection (probably 'Listing' since that's what you see in MongoDB)
     const collection = db.collection('Listing');
     
     let listings = await collection.find({ "_id": new ObjectId(listingId) }).toArray();

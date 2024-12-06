@@ -30,6 +30,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack }) => {
       console.log("Login successful:", result);
     }
     window.location.reload();
+    console.log("Refreshed");
+
   }, [email, password]);
 
   return (

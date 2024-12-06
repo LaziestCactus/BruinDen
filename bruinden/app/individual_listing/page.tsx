@@ -62,7 +62,7 @@ const ListingPage: React.FC = () => {
 
   useEffect(() => {
     const fetchListing = async () => {
-      if (!id) return; // ID is not available yet
+      if (!id) return; 
 
       try {
         const response = await fetch(`/api/individual_listing?listingId=${id}`, {
@@ -71,13 +71,13 @@ const ListingPage: React.FC = () => {
             'Content-Type': 'application/json',
           },
         });
-        console.log('Response received:', response); // Add this log
+        console.log('Response received:', response); 
   
         if (!response.ok) {
           throw new Error('Failed to fetch listings');
         }
         const data = await response.json();
-        console.log('Data received:', data); // Add this log
+        console.log('Data received:', data); 
         setListing(data);
         setIsLoading(false);
       } catch (error) {

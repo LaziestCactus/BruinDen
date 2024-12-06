@@ -91,5 +91,3 @@ model Comment {
   user      User     @relation(fields: [userId], references: [id])
 }
 
-
-//downgrade react

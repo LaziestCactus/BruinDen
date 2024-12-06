@@ -10,7 +10,7 @@ interface MapProps {
 type POI = {key: string, location: google.maps.LatLngLiteral}
 type pinType = {background: string, glyphColor: string, borderColor: string}
 
-// Potentially add as a feature to determine closeness to buildings based on major
+// Potentially add as a feature to determine closeness to buildings based on major?
 const campusLocations: POI[] = [
     {key: "BoelterHall", location: {lat: 34.06945230609133, lng: -118.44305684727077}},
     {key: "YoungHall", location: {lat: 34.06883013708254, lng: -118.44153335271912}},

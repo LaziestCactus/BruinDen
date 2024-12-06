@@ -7,7 +7,7 @@ const Logo = () =>{
 
     return (
         <Image 
-            onClick={() => router.push('/')} // Click on logo to reset category selection
+            onClick={() => router.push('/')}
             alt = "BruinDen Logo" 
             className="hidden md:block cursor-pointer" 
             height = "80" 

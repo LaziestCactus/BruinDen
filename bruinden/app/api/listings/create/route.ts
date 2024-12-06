@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
-// It's good practice to validate environment variables
 if (!process.env.CLOUDINARY_CLOUD_NAME || 
     !process.env.CLOUDINARY_API_KEY || 
     !process.env.CLOUDINARY_API_SECRET) {
@@ -12,7 +11,7 @@ async function uploadToCloudinary(file: File) {
   try {
       // Prepare the request to Cloudinary
       const formData = new FormData();
-      formData.append('file', file); // Directly append the file
+      formData.append('file', file); 
       formData.append('upload_preset', 'bruinden_listings');
 
       const response = await fetch(
@@ -44,14 +43,12 @@ export async function POST(request: Request) {
         const formDataObj: { [key: string]: any } = {};
         const images = formData.getAll('images') as File[];
         
-        // Process other form fields
         for (const [key, value] of formData.entries()) {
             if (key !== 'images') {
                 formDataObj[key] = value;
             }
         }
 
-        // Upload images to Cloudinary
         let imageUrls: string[] = [];
         if (images.length > 0) {
             try {
@@ -65,7 +62,6 @@ export async function POST(request: Request) {
             }
         }
 
-        // Validate required fields
         const requiredFields = ['address', 'price', 'bedrooms', 'bathrooms'];
         for (const field of requiredFields) {
             if (!formDataObj[field]) {
@@ -76,7 +72,6 @@ export async function POST(request: Request) {
             }
         }
 
-        // Connect to MongoDB
         const client = await clientPromise;
         const db = client.db("test");
         const collection = db.collection("Listing");
@@ -97,7 +92,6 @@ export async function POST(request: Request) {
             lng: geocodeData.results[0].geometry.location.lng,
         };
 
-        // Prepare listing data
         const listingData = {
             title: "Apartment Listing",
             address: formDataObj.address,

@@ -21,13 +21,8 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
   const [open, setOpen] = useState(false);
   const [snackBarText, setSnackBarText] = useState('');
 
-  const handleGoogleSignUp = useCallback(() => {
-    // Implement Google sign-up here
-  }, []);
-
   const handleSignUp = useCallback(async () => {
-    // Implement sign-up here
-    if (!firstName || ! lastName || !email || !password || !gender || !collegeYear || !universityId){
+    if (!firstName || !lastName || !email || !password || !gender || !collegeYear){
       setSnackBarText('Please fill out all fields');
       setOpen(true);
       return;

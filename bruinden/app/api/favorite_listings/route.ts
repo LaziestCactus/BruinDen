@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import clientPromise from '../../../lib/mongodb';
 import { ObjectId } from 'mongodb';
 
-// Define the Listing interface
 interface Listing {
   _id: string;
   title: string;
@@ -18,7 +17,6 @@ interface Listing {
   bathrooms: number;
 }
 
-// API Route to get favorited listings
 export async function GET(request: Request) {
   const userId = new URL(request.url).searchParams.get('userId');
 
@@ -35,7 +33,6 @@ export async function GET(request: Request) {
 
     console.log('Connected to MongoDB');
 
-    // Log collections
     const collections = await db.listCollections().toArray();
     console.log('Available collections:', collections.map(c => c.name));
     const decodedUserId = decodeURIComponent(userId);
@@ -48,7 +45,6 @@ export async function GET(request: Request) {
       .toArray();
 
     console.log('Favorite Listings IDs:', favoriteListings);
-    // Extract listing IDs from the favorite documents
     const listingIds = favoriteListings.map(favorite => favorite.listingId);
     // return NextResponse.json(listingIds);
 
@@ -56,7 +52,6 @@ export async function GET(request: Request) {
       return NextResponse.json([]);
     }
 
-    // Fetch details of the favorited listings
     const listingsCollection = db.collection('Listing');
     const listings = await listingsCollection
       .find({ _id: { $in: listingIds.map(id => new ObjectId(id)) } })
@@ -64,7 +59,6 @@ export async function GET(request: Request) {
 
     console.log('Fetched Listings:', listings);
 
-    // Format the listings to return clean data
     const formattedListings = listings.map(listing => ({
       ...listing,
       _id: listing._id.toString(),
