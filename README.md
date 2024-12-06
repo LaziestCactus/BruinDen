@@ -1,6 +1,6 @@
 # BruinDen
 
-## Project Members & Git ID
+### Project Members & Git ID
 - [Kelsey Shan](https://github.com/kshan813)
 - [Zhanhao Cao](https://github.com/LaziestCactus)
 - [Jayden Truong](https://github.com/jaydent4)
