@@ -54,7 +54,7 @@ npm install
 You can view the package.json file to see what dependencies were installed.
 
 ### Database Set Up
-Use the .env in our Code Repo Document to view the apartment listings and posts we've added. You should have something for these:
+Use the .env in our Code Repo Document submitted on gradescope to view the apartment listings and posts we've already added to the database for testing. You should have something for these in the .env:
 - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 - DATABASE_URL
 - NEXTAUTH_SECRET
