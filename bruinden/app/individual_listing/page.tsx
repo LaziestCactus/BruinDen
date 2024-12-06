@@ -6,18 +6,15 @@ import { useSearchParams } from 'next/navigation';
 import ImageCarousel from './components/ImageCarousel';
 import ContactBox from './components/ContactBox';
 import AmenitiesList from './components/AmenitiesList';
-import MapComponent from '../components/housing/MapComponent';
+import MapComponent from './components/MapComponent';
 
 
-/*
-Current individual listing page needs the following information based on the props.
-I believe other pages currently use different versions 
-*/
 interface ListingProps {
   id: string;
   title: string;
   description: string;
   imageSrc: string[];
+  additionalImageSrc: string[];
   createdDate: string;
   category: string;
   roomCount: number;
@@ -189,7 +186,7 @@ const ListingPage: React.FC = () => {
               Location
             </h2>
               <MapComponent address={listing.address} lat={listing.lat} long={listing.long} />
-          </div>
+            </div>
         </div>
         <div className="w-1/3 pt-8 pr-16">
           <ContactBox name={listing.user.name} email={listing.user.email} phone={listing.user.phone} picture={listing.user.picture} />
