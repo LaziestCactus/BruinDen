@@ -24,7 +24,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onBack }) => {
   const handleGoogleSignUp = useCallback(() => {
     // Implement Google sign-up here
   }, []);
-  axios.defaults.baseURL = "http://localhost:3000";
+
   const handleSignUp = useCallback(async () => {
     // Implement sign-up here
     if (!firstName || ! lastName || !email || !password || !gender || !collegeYear || !universityId){

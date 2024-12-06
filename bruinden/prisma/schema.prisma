@@ -56,8 +56,13 @@ model Listing {
   address String
   userID String @db.ObjectId
   price Int
-
+  amenities String?   
+  location Json?      
+  squareFeet Int? 
   user User @relation("UserListings", fields: [userID], references: [id], onDelete: Cascade)
+<<<<<<< HEAD:bruinden/prisma/schema.prisma
+}
+=======
   favoritedBy    Favorite[]
 }
 
@@ -93,3 +98,4 @@ model Comment {
 
 
 //downgrade react
+>>>>>>> 995ab00bfeffbdf02d2dc0cb6b727d204507996d:bruinden/app/prisma/schema.prisma

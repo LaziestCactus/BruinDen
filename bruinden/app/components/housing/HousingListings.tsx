@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { Heart, ChevronDown } from 'lucide-react';
-import MapComponent from './MapComponent';
+import MapComponent from '../housing/MapComponent';
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { FaHeart } from 'react-icons/fa'

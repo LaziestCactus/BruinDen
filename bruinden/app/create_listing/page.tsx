@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-// Previous SVG icon components remain the same...
 const LocationIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -33,28 +33,85 @@ const SquareIcon = () => (
 );
 
 const CreateListing = () => {
+  const router = useRouter();
   const [address, setAddress] = useState('');
+  const [price, setPrice] = useState('');
   const [bedrooms, setBedrooms] = useState('');
   const [bathrooms, setBathrooms] = useState('');
   const [sqft, setSqft] = useState('');
   const [amenities, setAmenities] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState<File[]>([]);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission here
-  };
+    console.log(images);
+    console.log('Form submitted');
+    
+    try {
+      const formData = new FormData();
+      formData.append('address', address);
+      formData.append('price', price);
+      formData.append('bedrooms', bedrooms);
+      formData.append('bathrooms', bathrooms);
+      formData.append('squareFeet', sqft);
+      formData.append('amenities', amenities);
+      formData.append('description', description);
+      
+      // Append each image to formData
+      images.forEach((image) => {
+        formData.append('images', image);
+      });
+
+      console.log('Sending data...');
+
+      const response = await fetch('/api/listings/create', {
+        method: 'POST',
+        body: formData // Send as FormData, not JSON
+      });
+
+      console.log('Response status:', response.status);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Server error:', errorData);
+        throw new Error(errorData.error || 'Failed to create listing');
+      }
+
+      const data = await response.json();
+      console.log('Success response:', data);
+
+      // Show success message
+      alert('Listing created successfully!');
+      
+      // Clear the form
+      setAddress('');
+      setPrice('');
+      setBedrooms('');
+      setBathrooms('');
+      setSqft('');
+      setAmenities('');
+      setDescription('');
+      setImages([]);
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('Failed to create listing. Please try again.');
+    }
+};
 
   return (
-    <div className="w-full p-6 bg-gray-100">
-    <div className="w-full mt-8 mx-auto">
-    <h1 style={{ fontSize: "50px", marginTop: "100px", marginBottom: "20px", display: "flex", alignItems: "center", fontWeight: "bold", justifyContent: "center", textAlign: "center", color: "#2F4858"}}>Create an Apartment Listing</h1>
-    <hr style={{ border: "3px solid #2F4858", marginBottom: "20px" }} />
-        <div className="space-y-4 bg-white p-6 rounded-lg shadow-md">
+    <div className="max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4 pt-24">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8">Apartment Listing</h1>
+        {error && (
+          <div className="bg-red-50 text-red-500 p-4 mb-4 rounded-md">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
-            {/* Previous inputs remain same until amenities... */}
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Address
@@ -69,6 +126,24 @@ const CreateListing = () => {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Price (per month)
+              </label>
+              <div className="flex items-center">
+                <span className="absolute text-gray-400">$</span>
+                <input
+                  type="number"
+                  placeholder="Monthly rent"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
                 />
               </div>
             </div>
@@ -88,6 +163,7 @@ const CreateListing = () => {
                     value={bedrooms}
                     onChange={(e) => setBedrooms(Math.max(0, Number(e.target.value)).toString())}
                     className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    required
                   />
                 </div>
               </div>
@@ -105,6 +181,7 @@ const CreateListing = () => {
                     value={bathrooms}
                     onChange={(e) => setBathrooms(Math.max(0, Number(e.target.value)).toString())}
                     className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    required
                   />
                 </div>
               </div>
@@ -124,11 +201,11 @@ const CreateListing = () => {
                   value={sqft}
                   onChange={(e) => setSqft(Math.max(0, Number(e.target.value)).toString())}
                   className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
                 />
               </div>
             </div>
 
-            {/* New Amenities Input */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Amenities
@@ -139,6 +216,7 @@ const CreateListing = () => {
                 onChange={(e) => setAmenities(e.target.value)}
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                required
               />
             </div>
 
@@ -152,6 +230,7 @@ const CreateListing = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                required
               />
             </div>
 
@@ -200,6 +279,7 @@ const CreateListing = () => {
           <div className="flex justify-end space-x-4">
             <button
               type="button"
+              onClick={() => router.back()}
               className="px-6 py-3 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
             >
               Cancel
@@ -214,7 +294,7 @@ const CreateListing = () => {
         </form>
         </div>
       </div>
-    </div>
+    //</div>
   );
 };
 

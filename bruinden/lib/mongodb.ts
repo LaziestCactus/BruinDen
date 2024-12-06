@@ -1,36 +1,28 @@
 import { MongoClient } from 'mongodb';
 
 if (!process.env.DATABASE_URL) {
-  throw new Error('Add MongoDB to .env.local');
+  throw new Error('Invalid/Missing environment variable: "DATABASE_URL"')
 }
 
 const uri = process.env.DATABASE_URL;
-console.log('MongoDB URI exists:', !!uri); // Log if URI exists
+const options = {};
 
-let client: MongoClient;
+let client;
 let clientPromise: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === 'development') {
   let globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>;
-  };
+    _mongoClientPromise?: Promise<MongoClient>
+  }
 
   if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri);
+    client = new MongoClient(uri, options)
     globalWithMongo._mongoClientPromise = client.connect()
-      .then(client => {
-        console.log('MongoDB connected successfully');
-        return client;
-      })
-      .catch(err => {
-        console.error('MongoDB connection error:', err);
-        throw err;
-      });
   }
-  clientPromise = globalWithMongo._mongoClientPromise;
+  clientPromise = globalWithMongo._mongoClientPromise
 } else {
-  client = new MongoClient(uri);
-  clientPromise = client.connect();
+  client = new MongoClient(uri, options)
+  clientPromise = client.connect()
 }
 
 export default clientPromise;
