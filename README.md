@@ -1,5 +1,5 @@
 # BruinDen
-Project Members: Zhanhao Cao, Corey Shen, Richard Chen, Maddox Yu, Jayden Truong, Kelsey Shan
+Project Members: Kelsey Shan, Zhanhao Cao, Corey Shen, Richard Chen, Maddox Yu, Jayden Truong
 
 BruinDen is a UCLA-specific platform created to streamline the off-campus housing search by connecting UCLA students who need to sublease or find housing for upcoming academic terms. By exclusively targeting Bruins, BruinDen provides a secure, user-friendly environment that simplifies the complexities of apartment hunting, roommate matching, and lease transfers, making it easier for UCLA students to find affordable, college-budget-friendly housing.
 
