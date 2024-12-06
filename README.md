@@ -1,11 +1,10 @@
 # BruinDen
-Project Members:
-- Kelsey Shan: @kshan813
-- Zhanhao Cao: @LaziestCactus
-- Jayden Truong: @jaydent4 
-- Maddox Yu: @maddoxyu
-- Corey Shen: @corey-shen
-- Richard Chen: @chenr4731
+- [Kelsey Shan](https://github.com/kshan813)
+- [Zhanhao Cao](https://github.com/LaziestCactus)
+- [Jayden Truong](https://github.com/jaydent4)
+- [Maddox Yu](https://github.com/maddoxyu)
+- [Corey Shen](https://github.com/corey-shen)
+- [Richard Chen](https://github.com/chenr4731)
 
 BruinDen is a UCLA-specific platform created to streamline the off-campus housing search by connecting UCLA students who need to sublease or find housing for upcoming academic terms. By exclusively targeting Bruins, BruinDen provides a secure, user-friendly environment that simplifies the complexities of apartment hunting, roommate matching, and lease transfers, making it easier for UCLA students to find affordable, college-budget-friendly housing.
 
