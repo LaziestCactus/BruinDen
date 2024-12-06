@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { FaHeart } from 'react-icons/fa'
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import ImageCarousel from './components/ImageCarousel';
 import ContactBox from './components/ContactBox';
 import AmenitiesList from './components/AmenitiesList';
-import MapComponent from './components/MapComponent';
+import MapComponent from '../components/housing/MapComponent';
 
 
 /*
@@ -43,8 +43,10 @@ const ListingPage: React.FC = () => {
   const [listing, setListing] = useState<ListingProps | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-  const { id } = router.query;
+  
+  const searchParams = useSearchParams()
+
+  const id = searchParams.get('id');
 
   const handleHeartClick = () => {
     setHeartFilled(!heartFilled);

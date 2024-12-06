@@ -6,6 +6,7 @@ import MapComponent from './MapComponent';
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { FaHeart } from 'react-icons/fa'
+import Link from 'next/link';
 
 interface Location {
   lat: number;
@@ -276,7 +277,11 @@ const HousingListings = () => {
                   <div className="w-full sm:w-2/3 p-4">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-semibold text-lg">{listing.address}</h3>
+                        <h3 className="font-semibold text-lg">
+                        <Link href={{ pathname: '/individual_listing', query: { id: listing._id } }}>
+                          {listing.address}
+                        </Link>
+                        </h3>
                         <p className="text-gray-600 text-sm">
                           {listing.squareFeet} sq ft | {listing.bedrooms} beds | {listing.bathrooms} baths
                         </p>
