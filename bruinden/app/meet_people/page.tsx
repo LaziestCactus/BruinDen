@@ -3,12 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaComments } from "react-icons/fa";
 import { FiEdit3 } from "react-icons/fi";
-
-type User = {
-  id: string;
-  name?: string;
-  email?: string;
-};
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 type Comment = {
   id: string;
@@ -27,14 +23,40 @@ type Post = {
   createdAt: Date;
 };
 
+interface User {
+  id: string;
+  email: string;
+  token?: string;
+}
+
 const MeetPeople: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [posts, setPosts] = useState<Post[]>([]);
   const [opacity, setOpacity] = useState<number>(1);
   const [commentText, setCommentText] = useState<{ [key: string]: string }>({});
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  const currentUserId = "673d862e31c9d01b481954d9"; //this should be whoever is logged in
+  useEffect(() => {
+    const fetchUserFromToken = () => {
+      const token = Cookies.get("auth_token");
+      console.log("token: ", token);
+      if (token) {
+        try {
+          const decodedToken = jwt.decode(token) as User;
+          console.log("decoded token: ", decodedToken);
+          setCurrentUser(decodedToken);
+        } catch (error) {
+          console.log("Failed to decode token", error);
+        }
+      }
+    };
+    fetchUserFromToken();
+  }, []);
+  const currentUserId = currentUser?.id;
+  useEffect(() => {
+    console.log(currentUserId);
+  }, [currentUserId]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,22 +71,6 @@ const MeetPeople: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  // const createPost = () => {
-  //   if (title && content) {
-  //     const newPost: Post = {
-  //       id: `post${posts.length + 1}`,
-  //       title,
-  //       content,
-  //       userId: currentUserId,
-  //       comments: [],
-  //       createdAt: new Date(),
-  //     };
-  //     setPosts([newPost, ...posts]);
-  //     setTitle("");
-  //     setContent("");
-  //   }
-  // };
 
   const createPost = async () => {
     if (title && content) {
@@ -94,25 +100,6 @@ const MeetPeople: React.FC = () => {
       }
     }
   };
-
-  // const addComment = (postId: string) => {
-  //   const text = commentText[postId];
-  //   if (text) {
-  //     const newComment: Comment = {
-  //       id: `comment${Date.now()}`,
-  //       text,
-  //       userId: currentUserId,
-  //     };
-  //     setPosts((prevPosts) =>
-  //       prevPosts.map((post) =>
-  //         post.id === postId
-  //           ? { ...post, comments: [...post.comments, newComment] }
-  //           : post
-  //       )
-  //     );
-  //     setCommentText({ ...commentText, [postId]: "" });
-  //   }
-  // };
 
   const addComment = async (postId: string) => {
     const text = commentText[postId];

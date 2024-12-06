@@ -3,8 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
-import UserId from "@/pages/api/user/[userId]";
-//import { getSession } from "next-auth/react";
+//import UserId from "@/pages/api/user/[userId]";
 
 interface User {
   id: string;
@@ -74,9 +73,6 @@ const ProfilePage = () => {
       setLastName(last || "");
     }
   }, [currentUser]);
-
-  // if (currentUser?.name) {
-  //   const [first, last] = currentUser.name.split(" ");
 
   const handleImageUpload = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
