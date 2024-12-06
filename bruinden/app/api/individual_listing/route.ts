@@ -53,6 +53,13 @@ interface Listing {
 
 export async function GET(request: Request) {
     const listingId = new URL(request.url).searchParams.get('listingId');
+  if (!listingId) {
+    return NextResponse.json(
+        { error: 'Listing ID is required' },
+        { status: 400 }
+    );
+  }
+  
   try {
     const client = await clientPromise;
     console.log('Connected to MongoDB');
