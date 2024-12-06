@@ -29,6 +29,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack }) => {
       console.log("JWT TOKEN:", token);
       console.log("Login successful:", result);
     }
+    window.location.reload();
   }, [email, password]);
 
   return (

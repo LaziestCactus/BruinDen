@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import MenuItem from "./MenuItem";
 import LoginPage from "../../../pages/auth/LoginPage";
 import SignUpPage from "../../../pages/auth/SignUpPage";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
@@ -41,7 +41,6 @@ const UserMenu = () => {
     fetchUserFromToken();
   }, []);
 
-
   const [isOpen, setIsOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -68,13 +67,14 @@ const UserMenu = () => {
 
   const handleCreateListingClick = useCallback(() => {
     setIsOpen(false);
-    router.push('/create_listing');
+    router.push("/create_listing");
   }, [router]);
 
   const handleLogOut = useCallback(() => {
     setCurrentUser(null);
     Cookies.remove("auth_token");
-  }, [] );
+    window.location.reload();
+  }, []);
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
@@ -97,10 +97,26 @@ const UserMenu = () => {
             {currentUser ? ( //TODO: Check if user exist instead. Need to debug (code commented above)
               <>
                 {/*fetch Render if currentUser is not null */}
-                <MenuItem onClick={() => {}} label="Profile" reference="/profile" />
-                <MenuItem onClick={() => {}} label="Favorites" reference="/favorites" />
-                <MenuItem onClick={() => {}} label="Create a Listing" reference="/create_listing"/>
-                <MenuItem onClick={handleLogOut} label="Log Out" reference="/" />
+                <MenuItem
+                  onClick={() => {}}
+                  label="Profile"
+                  reference="/profile"
+                />
+                <MenuItem
+                  onClick={() => {}}
+                  label="Favorites"
+                  reference="/favorites"
+                />
+                <MenuItem
+                  onClick={() => {}}
+                  label="Create a Listing"
+                  reference="/create_listing"
+                />
+                <MenuItem
+                  onClick={handleLogOut}
+                  label="Log Out"
+                  reference="/"
+                />
               </>
             ) : (
               <>

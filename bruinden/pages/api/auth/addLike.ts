@@ -10,7 +10,7 @@ export default async function handler(
 
     // Check if both userId and listingId are provided
     if (!userId || !listingId) {
-      return res.status(400).json({ error: "Missing required fields: userId or listingId" });
+      return res.status(400).json({ error: "Missing required fields: userId or listingId", userId, listingId });
     }
 
     try {

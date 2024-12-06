@@ -1,52 +1,164 @@
-'use client';
-import { useState, useCallback } from 'react';
-import Image from 'next/image';
+"use client";
+import { useState, useCallback, useEffect } from "react";
+import Image from "next/image";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
+import UserId from "@/pages/api/user/[userId]";
+//import { getSession } from "next-auth/react";
+
+interface User {
+  id: string;
+  email: string;
+  token?: string;
+  name?: string;
+  uid?: string;
+  collegeYear?: string;
+  gender?: string;
+}
 
 const ProfilePage = () => {
   // This should be the stuff the user initially set when signing up and display them instead of the temps I set it to
-  const [firstName, setFirstName] = useState('TEMP');
-  const [lastName, setLastName] = useState('TEMP');
-  const [universityId, setUniversityId] = useState('1234567890');
+
+  const [currentUser, setCurrentUser] = useState<User | null>(null); // Assume this gets populated from a token or API
+  const [firstName, setFirstName] = useState<string>(""); // Start with empty string
+  const [lastName, setLastName] = useState<string>(""); // Start with empty string
+  const [universityId, setUniversityId] = useState(currentUser?.uid);
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [collegeYear, setCollegeYear] = useState('Freshman');
-  const [gender, setGender] = useState('Male');
-  const [idError, setIdError] = useState('');
+  const [collegeYear, setCollegeYear] = useState(currentUser?.collegeYear);
+  const [gender, setGender] = useState(currentUser?.gender);
+  const [idError, setIdError] = useState("");
 
-  const handleImageUpload = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfileImage(e.target?.result as string);
+  useEffect(() => {
+    const fetchUserFromToken = () => {
+      const token = Cookies.get("auth_token");
+      console.log("token: ", token);
+      if (token) {
+        try {
+          const decodedToken = jwt.decode(token) as User;
+          console.log("decoded token: ", decodedToken);
+          setCurrentUser(decodedToken);
+        } catch (error) {
+          console.log("Failed to decode token", error);
+        }
+      }
+    };
+    fetchUserFromToken();
+  }, []);
+
+  const email = currentUser?.email;
+  const fetchUser = async (email: string) => {
+    try {
+      const response = await fetch(
+        `/api/auth/getUserByEmail?email=${encodeURIComponent(email)}`
+      );
+      if (!response.ok) {
+        throw new Error("Fail to fetch user from email");
+      }
+      const data = await response.json();
+      setCurrentUser(data.user); // Adjust based on your API response structure
+    } catch (error) {
+      console.error("Can't fetch user:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (email) {
+      fetchUser(email);
+    }
+  }, [email]);
+
+  useEffect(() => {
+    if (currentUser?.name) {
+      const [first, last] = currentUser.name.split(" ");
+      setFirstName(first);
+      setLastName(last || "");
+    }
+  }, [currentUser]);
+
+  // if (currentUser?.name) {
+  //   const [first, last] = currentUser.name.split(" ");
+
+  const handleImageUpload = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setProfileImage(e.target?.result as string);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    },
+    []
+  );
+
+  const handleUniversityIdChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      if (/^\d*$/.test(value)) {
+        setUniversityId(value);
+        setIdError("");
+      } else {
+        setIdError("University ID must be a number");
+      }
+    },
+    []
+  );
+
+  const userId = currentUser?.id;
+  const name = firstName + " " + lastName;
+
+  const handleSave = useCallback(async () => {
+    try {
+      const updatedUser = {
+        name,
+        collegeYear,
+        gender,
       };
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }, []);
 
-  const handleUniversityIdChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    if (/^\d*$/.test(value)) {
-      setUniversityId(value);
-      setIdError('');
-    } else {
-      setIdError('University ID must be a number');
-    }
-  }, []);
+      const response = await fetch(`/api/auth/updateUser?id=${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      });
 
-  const handleSave = useCallback(() => {
-    // Should save the updated info to the database
-  }, [firstName, lastName, universityId, collegeYear, gender]);
+      if (!response.ok) {
+        throw new Error("Failed to update user");
+      }
+
+      const data = await response.json();
+      console.log("User updated successfully:", data);
+    } catch (error) {
+      console.error("Error saving user info:", error);
+    }
+  }, [firstName, lastName, collegeYear, gender, userId]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 style={{ fontSize: "50px", marginTop: "100px", marginBottom: "20px", display: "flex", alignItems: "center", fontWeight: "bold", justifyContent: "center", textAlign: "center", color: "#2F4858"}}>Profile Information</h1>
+      <h1
+        style={{
+          fontSize: "50px",
+          marginTop: "100px",
+          marginBottom: "20px",
+          display: "flex",
+          alignItems: "center",
+          fontWeight: "bold",
+          justifyContent: "center",
+          textAlign: "center",
+          color: "#2F4858",
+        }}
+      >
+        Profile Information
+      </h1>
       <hr style={{ border: "3px solid #2F4858", marginBottom: "20px" }} />
       <div className="flex flex-col md:flex-row gap-8">
         <div className="md:w-1/3 flex flex-col items-center bg-white p-6 rounded-lg shadow-md">
           <div className="w-48 h-48 mb-4 rounded-full overflow-hidden border-4 border-gray-300 relative">
             {profileImage ? (
-              <Image 
-                src={profileImage} 
-                alt="Profile" 
+              <Image
+                src={profileImage}
+                alt="Profile"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-full"

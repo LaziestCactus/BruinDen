@@ -156,7 +156,7 @@ const MeetPeople: React.FC = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch("/api/auth/getPosts"); // Replace with your API endpoint
+      const response = await fetch("/api/auth/getPosts");
       const data = await response.json();
       setPosts(data);
     } catch (error) {

@@ -1,6 +1,6 @@
 // npm install @prisma/client
 // npx prisma generate
-import { prisma } from "../../../server/prisma/libs/prismadb";
+import prisma from "../../../server/prisma/libs/prismadb";
 
 // USER QUERY FUNCTIONS
 
@@ -40,7 +40,9 @@ async function updateUser(
   name?: string,
   email?: string,
   hashedPassword?: string,
-  image?: string
+  image?: string,
+  gender?: string,
+  collegeYear?: string
 ) {
   // Intialize a map for possibly mapped data fields
   const data: { [key: string]: string } = {}; //might need to use "any" instead of "string"
@@ -49,6 +51,9 @@ async function updateUser(
   if (email) data.email = email;
   if (hashedPassword) data.hashedPassword = hashedPassword;
   if (image) data.image = image;
+  if (gender) data.gender = gender;
+  if (collegeYear) data.collegeYear = collegeYear;
+
   // Perform the update operation using prisma
   return await prisma.user.update({
     where: { id },
