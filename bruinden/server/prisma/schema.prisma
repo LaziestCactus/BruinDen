@@ -59,6 +59,16 @@ model Listing {
   user User @relation(fields: [userID], references: [id], onDelete: Cascade)
 }
 
+model Favorite {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  listingId  String   @db.ObjectId
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
 model Post {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
@@ -78,6 +88,5 @@ model Comment {
   post      Post     @relation(fields: [postId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 }
-
 
 //downgrade react
