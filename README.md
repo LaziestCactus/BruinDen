@@ -53,10 +53,10 @@ npm install
 ```
 You can view the package.json file to see what dependencies were installed.
 
-## Database Set Up
+### Database Set Up
 Use the .env in our Code Repo Document to view the apartment listings and posts we've added
 
-## Running the Project
+### Running the Project
 
 Run the development server:
 
