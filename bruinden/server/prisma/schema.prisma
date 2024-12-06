@@ -20,7 +20,8 @@ model User {
   collegeYear String?
   gender String?
   accounts Account[]
-  listings Listing[]
+  listings Listing[] @relation("UserListings")
+  favorites Favorite[]
   posts Post[]
   comments Comment[]
 }
@@ -56,7 +57,8 @@ model Listing {
   userID String @db.ObjectId
   price Int
 
-  user User @relation(fields: [userID], references: [id], onDelete: Cascade)
+  user User @relation("UserListings", fields: [userID], references: [id], onDelete: Cascade)
+  favoritedBy    Favorite[]
 }
 
 model Favorite {
@@ -88,5 +90,6 @@ model Comment {
   post      Post     @relation(fields: [postId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 }
+
 
 //downgrade react
