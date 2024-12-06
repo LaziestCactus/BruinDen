@@ -1,5 +1,7 @@
 # BruinDen
 
+Jump To: [Overview](##Project Members & Git ID) | [Installation & Running](#Installation) | [Testing](#Testing Overview)
+
 ### Project Members & Git ID
 - [Kelsey Shan](https://github.com/kshan813)
 - [Zhanhao Cao](https://github.com/LaziestCactus)
