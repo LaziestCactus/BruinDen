@@ -39,7 +39,7 @@ const CreateListing = () => {
   const [bedrooms, setBedrooms] = useState('');
   const [bathrooms, setBathrooms] = useState('');
   const [sqft, setSqft] = useState('');
-  const [amenities, setAmenities] = useState('');
+  const [amenities, setAmenities] = useState<string[]>([]);
   const [description, setDescription] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [error, setError] = useState('');
@@ -48,7 +48,7 @@ const CreateListing = () => {
     e.preventDefault();
     console.log(images);
     console.log('Form submitted');
-    
+  
     try {
       const formData = new FormData();
       formData.append('address', address);
@@ -56,7 +56,7 @@ const CreateListing = () => {
       formData.append('bedrooms', bedrooms);
       formData.append('bathrooms', bathrooms);
       formData.append('squareFeet', sqft);
-      formData.append('amenities', amenities);
+      formData.append('amenities', JSON.stringify(amenities));
       formData.append('description', description);
       
       images.forEach((image) => {
@@ -88,7 +88,7 @@ const CreateListing = () => {
       setBedrooms('');
       setBathrooms('');
       setSqft('');
-      setAmenities('');
+      setAmenities([]);
       setDescription('');
       setImages([]);
 
@@ -96,6 +96,11 @@ const CreateListing = () => {
       console.error('Submission error:', error);
       alert('Failed to create listing. Please try again.');
     }
+};
+
+const handleAmenitiesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { 
+  const amenitiesArray = e.target.value.split(',').map(amenity => amenity.trim());
+  setAmenities(amenitiesArray);
 };
 
   return (
@@ -210,7 +215,7 @@ const CreateListing = () => {
               <textarea
                 placeholder="List amenities (e.g., Parking, Laundry, Air Conditioning)"
                 value={amenities}
-                onChange={(e) => setAmenities(e.target.value)}
+                onChange={handleAmenitiesChange}
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 required
