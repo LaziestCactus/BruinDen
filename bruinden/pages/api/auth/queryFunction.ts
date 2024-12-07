@@ -38,19 +38,13 @@ async function getUserByID(id: string) {
 async function updateUser(
   id: string,
   name?: string,
-  email?: string,
-  hashedPassword?: string,
-  image?: string,
-  gender?: string,
-  collegeYear?: string
+  collegeYear?: string,
+  gender?: string
 ) {
   // Intialize a map for possibly mapped data fields
   const data: { [key: string]: string } = {}; //might need to use "any" instead of "string"
   // Conditionally add fields to the data object
   if (name) data.name = name;
-  if (email) data.email = email;
-  if (hashedPassword) data.hashedPassword = hashedPassword;
-  if (image) data.image = image;
   if (gender) data.gender = gender;
   if (collegeYear) data.collegeYear = collegeYear;
 

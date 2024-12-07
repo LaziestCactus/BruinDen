@@ -6,12 +6,12 @@ import jwt from "jsonwebtoken";
 
 interface User {
   id: string;
-  email: string;
-  token?: string;
+  email?: string;
   name?: string;
   uid?: string;
   collegeYear?: string;
   gender?: string;
+  token?: string;
 }
 
 const ProfilePage = () => {
@@ -22,11 +22,12 @@ const ProfilePage = () => {
   const [lastName, setLastName] = useState<string>(""); 
   const [universityId, setUniversityId] = useState(currentUser?.uid);
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [collegeYear, setCollegeYear] = useState(currentUser?.collegeYear);
-  const [gender, setGender] = useState(currentUser?.gender);
+  const [year, setCollegeYear] = useState(currentUser?.collegeYear);
+  const [currGender, setGender] = useState(currentUser?.gender);
   const [idError, setIdError] = useState("");
 
   useEffect(() => {
+    
     const fetchUserFromToken = () => {
       const token = Cookies.get("auth_token");
       console.log("token: ", token);
@@ -87,14 +88,12 @@ const ProfilePage = () => {
   );
 
   const userId = currentUser?.id;
-  const name = firstName + " " + lastName;
-
   const handleSave = useCallback(async () => {
     try {
       const updatedUser = {
-        name,
-        collegeYear,
-        gender,
+        name: firstName + " " + lastName,
+        collegeYear: year,
+        gender: currGender,
       };
 
       const response = await fetch(`/api/auth/updateUser?id=${userId}`, {
@@ -114,7 +113,7 @@ const ProfilePage = () => {
     } catch (error) {
       console.error("Error saving user info:", error);
     }
-  }, [firstName, lastName, collegeYear, gender, userId]);
+  }, [firstName, lastName, year, currGender, userId]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -185,7 +184,7 @@ const ProfilePage = () => {
           <div>
             <label className="block text-gray-700 mb-2">College Year</label>
             <select
-              value={collegeYear}
+              value={year}
               onChange={(e) => setCollegeYear(e.target.value)}
               className="w-full py-2 px-4 border border-gray-300 rounded-md"
             >
@@ -201,7 +200,7 @@ const ProfilePage = () => {
           <div>
             <label className="block text-gray-700 mb-2">Gender</label>
             <select
-              value={gender}
+              value={currGender}
               onChange={(e) => setGender(e.target.value)}
               className="w-full py-2 px-4 border border-gray-300 rounded-md"
             >
